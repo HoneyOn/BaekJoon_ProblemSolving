@@ -1,0 +1,26 @@
+#quickSort
+arr = []
+N = int(input())
+for _ in range(N):
+    arr.append(int(input()))
+
+def quickSort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    less, more, equal = [], [], []
+    for _ in range(len(arr)):
+        each = arr.pop()
+        if each < pivot:
+            less.append(each)
+        elif each > pivot:
+            more.append(each)
+        else:
+            equal.append(each)
+    return quickSort(less) + equal + quickSort(more)
+    
+arr = quickSort(arr)
+
+for i in arr:
+    print(i)
+    
