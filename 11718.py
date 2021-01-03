@@ -7,7 +7,6 @@ while True:
         
 #2) sys.stdin
 import sys
-for i in range(101):
-    string = sys.stdin.readline()
-    print (string, end ='')
+for line in sys.stdin:
+    print (line, end ='')
         
