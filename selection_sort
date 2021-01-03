@@ -1,0 +1,27 @@
+#selectionSort
+arr = []
+N = int(input())
+for _ in range(N):
+    arr.append(int(input()))
+
+#selection Sort
+def Swap(item, item2):
+    return item2,item
+
+def MinIndex(List, start, end):
+    indexOfMin = start
+    for i in range(start+1,end+1):
+        if(int(List[i]) < int(List[indexOfMin])):
+            indexOfMin = i
+    return indexOfMin
+
+def selectionSort(List, num):
+    endIndex = num - 1
+    for i in range(endIndex):
+        minIndex = MinIndex(List, i, endIndex)
+        List[i], List[minIndex] = Swap(List[i], List[minIndex])
+        
+selectionSort(arr,N)
+
+for i in arr:
+    print(i)
