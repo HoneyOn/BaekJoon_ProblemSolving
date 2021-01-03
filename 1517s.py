@@ -1,6 +1,8 @@
-#Merge Sort의 핵심은 리스트를 가운대를 기준으로 두개로 쪼갠 뒤 두 리스트 내 원소를 차례대로 비교하여 새로운 리스트에 추가시키고,
+#Merge Sort의 핵심은 리스트를 가운대를 기준으로 두개로 쪼갠 뒤 
+#두 리스트 내 원소를 차례대로 비교하여 새로운 리스트에 추가시키고,
 #추가된 리스트가 정렬된 리스트임
 #시간 복잡도는 최대 O(N*logN)
+#input 속도는 sys.stdin.readline() > raw_input() > input()
 import sys
 
 input = sys.stdin.readline
