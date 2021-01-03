@@ -1,0 +1,42 @@
+# heapSort
+import sys
+imput = sys.stdin.readline
+sys.setrecursionlimit(10 ** 9)
+
+arr = []
+N = int(input())
+for _ in range(N):
+    arr.append(int(input()))
+
+def Swap(item, item2):
+    return item2,item
+    
+def ReHeapDown(List,root, bottom):
+    left = root*2 + 1
+    right = root*2 + 2
+    if(left <= bottom):
+        if(left == bottom):
+            maxC = left
+        else:
+            if(List[left] <= List[right]):
+                maxC = right
+            else:
+                maxC = left
+        if(List[root] < List[maxC]):
+            List[root], List[maxC] = Swap(List[root], List[maxC])
+            ReHeapDown(List,maxC, bottom)
+    
+def heapSort(List, N):
+    index = N//2 - 1
+    while(index >= 0):
+        ReHeapDown(List,index, N - 1)
+        index -= 1
+    index = N - 1
+    while(index >= 1):
+        List[0], List[index] = Swap(List[0], List[index])
+        ReHeapDown(List, 0, index - 1)
+        index -= 1
+        
+heapSort(arr, N)
+for i in arr:
+    print(i)
