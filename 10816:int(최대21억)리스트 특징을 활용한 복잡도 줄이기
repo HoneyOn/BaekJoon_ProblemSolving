@@ -1,0 +1,17 @@
+n = int(input())
+po = [0 for i in range(10000001)]
+ne = [0 for i in range(10000001)]
+sg = list(map(int, input().split()))
+for i in sg:
+    if i >= 0 :
+        po[i] += 1
+    else :
+        ne[i] += 1
+
+m = int(input())
+num = list(map(int, input().split()))
+for i in num:
+    if i >= 0 :
+        print(po[i], end=' ')
+    else:
+        print(ne[i], end=' ')
