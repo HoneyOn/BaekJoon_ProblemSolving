@@ -1,12 +1,15 @@
 from collections import Counter
 
 N = int(input())
-A = input().split(' ')
-A = [int(x) for x in A]
-M = int(input())
-B = input().split(' ')
-B = [int(x) for x in B]
 
+#domain 숫자들 담기
+A = list(map(int, input().split()))
+M = int(input())
+
+#갯수를 셀 숫자들 담기
+B = list(map(int, input().split()))
+
+#counting class 생성
 counter = Counter(A)
 
 for i in range(len(B)):
