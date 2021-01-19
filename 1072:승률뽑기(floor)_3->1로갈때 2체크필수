@@ -1,0 +1,24 @@
+import sys
+from math import floor
+input = sys.stdin.readline
+x, y= map(int,input().split())
+before = floor(100*y/x)
+if before == 100 or before == 99:
+    print(-1)
+    exit()
+st = 0
+ed = x+1
+mid = (st+ed)//2
+while(st != ed):
+    after = floor((y + mid) / (x + mid) * 100)
+    if(before == after):
+        st = mid + 1
+        mid = (st + ed) // 2
+    else:
+        ed = mid
+        mid = (st + ed) // 2
+
+if floor((y + st) / (x + st) * 100) == before:
+    print(st+1)
+else:
+    print(st)
