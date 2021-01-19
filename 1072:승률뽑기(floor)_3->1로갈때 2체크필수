@@ -17,8 +17,4 @@ while(st != ed):
     else:
         ed = mid
         mid = (st + ed) // 2
-
-if floor((y + st) / (x + st) * 100) == before:
-    print(st+1)
-else:
-    print(st)
+print(st+1 if floor((y + st) / (x + st) * 100) == before else st)
