@@ -12,4 +12,7 @@ while result:
     for i in range(10):
         if num%10 <= i: break
         result.append(num*10 + i)
+        
+    //for i in range(num%10):
+    //    result.append(num*10 + i)
 print(-1)
