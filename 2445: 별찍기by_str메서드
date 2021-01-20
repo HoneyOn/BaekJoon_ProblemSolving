@@ -7,3 +7,4 @@ for i in range(1,n+1):
 for i in range(n-1,0,-1):
     print("{}".format("*"*i).ljust(n), end='')
     print("{}".format("*"*i).rjust(n))
+![image](https://user-images.githubusercontent.com/62275592/105178188-0fd24980-5b6b-11eb-9e9d-c36e575e2d0e.png)
