@@ -1,0 +1,26 @@
+import sys
+input = sys.stdin.readline
+a, b = map(str, input().split())
+if(len(a) < len(b)):
+    a,b = b,a
+A, B = list(a), list(b)
+A.reverse()
+B.reverse()
+max_n = len(A)
+min_n = len(B)
+ans = [0 for i in range(max_n + 1)]
+for i in range(min_n):
+    k =int(A[i]) + int(B[i]) + 1 if ans[i] == 1 else int(A[i]) + int(B[i])
+    ans[i] = k%10
+    if(k >= 10): ans[i+1]=1
+for i in range(min_n,max_n):
+    ans[i] = int(A[i]) if ans[i] != 1 else int(A[i]) + 1
+    if ans[i] == 10:
+        ans[i+1]+=1
+        ans[i]=0
+ans.reverse()
+if(ans[0] == 0): ans.pop(0)
+for i in range(len(ans)):
+    ans[i] = str(ans[i])
+print(str.join('',ans))
+
