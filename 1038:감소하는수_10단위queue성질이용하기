@@ -16,3 +16,22 @@ while result:
     //for i in range(num%10):
     //    result.append(num*10 + i)
 print(-1)
+
+"""
+combinations을 이용한 방법
+
+from itertools import combinations
+a = ['9','8','7','6','5','4','3','2','1','0']
+nums = list()
+for i in range(1,11):
+    for j in list(combinations(a,i)):
+        number = ''.join(list(j))
+        nums.append(int(number))
+nums.sort()
+n = int(input())
+if n > 1022:
+    print(-1)
+else:
+    print(nums[n])
+
+"""
