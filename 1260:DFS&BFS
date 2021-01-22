@@ -26,3 +26,22 @@ def dfs(start, visited):
 
 print(*dfs(v,[]))
 print(*bfs(v))
+
+//재귀 없는 dfs
+def Dfs(start):
+    visited = list()
+    stack = [start]
+    queue = list()
+    while stack:
+        n = stack.pop(-1)
+        if n in stack:
+            stack.remove(n)
+        visited += [n]
+        for c in range(len(matrix[n])):
+            if matrix[n][c] == 1 and (c not in visited):
+                queue.append(c)
+        while len(queue) != 0:
+            tmp = queue.pop(-1)
+            if tmp not in visited:
+                stack.append(tmp)
+    return visited
