@@ -1,0 +1,49 @@
+#10026
+import sys,copy
+sys.setrecursionlimit(100000)
+input = sys.stdin.readline
+n = int(input())
+room = [[] for _ in range(n)]
+
+for i in range(n):
+    tmp = list()
+    sentence = input()
+    for j in range(n):
+        tmp.append(sentence[j])
+    room[i]=(tmp)
+room2 = copy.deepcopy(room)
+for i in range(n):
+    for j in range(n):
+        if room2[i][j]=='G':
+            room2[i][j]='R'
+
+ans = []
+cnt = 0
+def ck(x,y,room):
+    global cnt, ans
+    if (x,y) not in ans:
+        cnt +=1
+        ans.append((x,y))
+    ary = {(x-1,y),(x,y-1),(x+1,y),(x,y+1)}
+    del_list=set()
+    for elem in ary:
+        if elem[0] == n or elem[0] < 0 or elem[1] == n or elem[1] < 0:
+            del_list.add(elem)
+    ary = ary - del_list
+    for elem in ary:
+        if elem not in ans and room[x][y] == room[elem[0]][elem[1]]:
+            ans.append(elem)
+            ck(elem[0],elem[1],room)
+
+
+for i in range(n):
+    for j in range(n):
+        ck(i,j,room)
+print(cnt,end=' ')
+ans = []
+cnt = 0
+for i in range(n):
+    for j in range(n):
+        ck(i, j, room2)
+
+print(cnt)
