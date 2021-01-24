@@ -1,0 +1,12 @@
+import sys
+from itertools import combinations
+n,m = map(int,sys.stdin.readline().split())
+nums = list(map(int,sys.stdin.readline().split()))
+ans = list(set(map(sum,(combinations(nums,3)))))
+ans.sort()
+for i in range(len(ans)):
+    if ans[i] > m:
+        print(ans[i-1])
+        break
+if ans[-1] <= m:
+    print(ans[-1])
