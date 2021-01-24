@@ -19,3 +19,15 @@ for _ in range(N):
 
 while arr:
     print(heapq.heappop(arr)[1])
+--------------------------------------------------------------------------
+n = int(input())
+num=[]
+for _ in range(n):
+    a = str(input())
+    b = len(a)
+    num.append((b,a))
+num=list(set(num))
+
+num.sort()
+for j in num:
+    print(j[1])
