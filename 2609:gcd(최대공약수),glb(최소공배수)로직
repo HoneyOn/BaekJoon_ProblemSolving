@@ -1,0 +1,21 @@
+import sys
+
+def gcd(small,big):
+    while big != 0:
+        rest = small % big
+        small = big
+        big = rest
+    return small
+
+def gld(a,b,r):
+    return int(a * b / r)
+
+input = sys.stdin.readline
+
+a,b = map(int, input().split())
+if a > b:
+    print(gcd(b,a))
+    print(gld(a,b,gcd(b,a)))
+else :
+    print(gcd(a,b))
+    print(gld(a,b,gcd(a,b)))
