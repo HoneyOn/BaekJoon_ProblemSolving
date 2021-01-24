@@ -1,0 +1,21 @@
+#단어의 길이로 heap 우선순위를 설정한 튜플을 넣어줄 경우,
+heap에서 뽑을때는 자동으로 같은 길이라도 정렬된 순으로 뽑힘
+
+import sys
+import heapq
+
+N = int(sys.stdin.readline())
+
+arr = []
+isIn = {}
+
+for _ in range(N):
+    word = sys.stdin.readline().rstrip()
+    if isIn.get(word):
+        continue
+    else:
+        isIn[word] = True
+    heapq.heappush(arr, (len(word), word))
+
+while arr:
+    print(heapq.heappop(arr)[1])
