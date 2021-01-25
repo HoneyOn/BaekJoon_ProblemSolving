@@ -1,0 +1,10 @@
+num = int(input())
+for i in range(num):
+    H,W,N = map(int,input().split())
+    height = N%H
+    if height == 0:
+        height = H
+        room = N//H
+    else:
+        room = N//H+1
+    print(f"{height}{room:02d}")
