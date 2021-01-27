@@ -1,0 +1,60 @@
+이 문제의 관건은 100에서 시작할지, 번호를 누르고 시작할지 비교가 관건이다.
+
+itertools :
+https://blog.naver.com/je_un/222145127333
+
+1)itertools의 product(곱집합)을 이용
+
+n = int(input())
+m = int(input())
+if m:
+    button = list(map(int,input().split()))
+else:
+    button = []
+start = 100
+
+button_set = list(set(range(10)).difference(button))
+
+l = len(str(n))
+
+import itertools
+
+min_button = abs(start-n)
+
+for i in range(max(1,l-2),l+2):
+    for p in itertools.product(button_set,repeat=i):
+        p= map(str,p)
+        
+        b = int(''.join(p))
+        
+        
+        min_button = min(min_button, abs(b-n) +i)
+
+print(min_button)
+
+
+2)고장나지 않은 수 찾기
+
+n = int(input())
+m = int(input())
+ms = []
+if m != 0:
+    ms = list(input().split())
+
+ans = 999999999
+length = 0
+for i in range(1000000):
+    broken = False
+    for s in str(i):
+        if s in ms:
+            broken = True
+    if broken:
+        pass
+    else:
+        if ans > abs(n - i):
+            ans = abs(n - i)
+            length = len(str(i))
+
+ans = min(ans + length, abs(n - 100))
+
+print(ans)
