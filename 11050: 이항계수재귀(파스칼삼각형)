@@ -1,0 +1,24 @@
+#nC0 : n개 중에서 0개를 뽑는 경우의 수 =1
+
+#nC1 : n개 중에서 1개를 뽑는 경우의 수=n
+
+#nCn : n개 중에서 n개를 뽑는 경우의 수=1
+
+//만약 10사람 중에서 선관위 2명을 무작위로 선출한다면,
+ x라는 사람의 기준으로 생각하면
+ x가 선출되는 경우와 x가 선출되지 않는 경우로 나눌 수 있다.
+ 즉 9명에서 1명을 뽑는 x가 선출되는 경우와 x를 미리 제외하고 9명 중에서 2명을 뽑는 경우가 있다.
+ 
+ import sys
+input = sys.stdin.readline
+n, k = map(int,input().split())
+def Bi(n,k):
+    if k == 0:
+        return 0
+    elif k == 1:
+        return n
+    elif n == k:
+        return 1
+    else:
+        return Bi(n-1,k-1) + Bi(n-1,k)
+print(Bi(n,k))
