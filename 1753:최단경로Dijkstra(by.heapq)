@@ -1,0 +1,24 @@
+import sys,math,heapq
+input = sys.stdin.readline
+V, e= map(int,input().split())
+k = int(input())
+
+adj = {i : [] for i in range(1,V+1)}
+for _ in range(e):
+    u, v, w = map(int, input().split())
+    adj[u].append([v,w])
+dist = [math.inf]*(V+1)
+#힙큐는 항상 최소값을 리턴
+hq=list()
+heapq.heappush(hq,(0,k))
+dist[k]=0
+while hq:
+    weight,fromV = heapq.heappop(hq)
+    for toV, cost in adj[fromV]:
+        if cost+dist[fromV] < dist[toV]:
+            dist[toV] = cost+dist[fromV]
+            #반복문동안 heapq에 계속 추가되지만 이진트리형태로 최소값을 기준으로 push down됨
+            heapq.heappush(hq,(dist[toV],toV))
+
+for i in range(1, V+1):
+    print(dist[i]) if dist[i] != math.inf else print("INF")
