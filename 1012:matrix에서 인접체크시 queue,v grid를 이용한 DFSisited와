@@ -1,0 +1,37 @@
+import sys,collections
+sys.setrecursionlimit(100000)
+input = sys.stdin.readline
+T = int(input())
+
+def bfs(i,j):
+    global visited,bug
+    if grid[j][i]:
+        bug+=1
+    queue=collections.deque()
+    queue.append([j,i])
+    while queue:
+        [j,i]=queue.popleft()
+        visited[j][i]=True
+        if grid[j][i]:
+            if i+1<m and [j,i+1] not in queue and visited[j][i+1] == False and grid[j][i+1]==True:
+                queue.append([j,i+1])
+            if i-1>=0 and [j,i-1] not in queue and visited[j][i-1] == False and grid[j][i-1]==True:
+                queue.append([j,i-1])
+            if j+1<n and [j+1,i] not in queue and visited[j+1][i] == False and grid[j+1][i]==True:
+                queue.append([j+1,i])
+            if j-1>=0 and [j-1,i] not in queue and visited[j-1][i] == False and grid[j-1][i]==True:
+                queue.append([j-1,i])
+
+for _ in range(T):
+    m, n, k = map(int, input().split())
+    grid = [[False] * m for _ in range(n)]
+    for _ in range(k):
+        x, y = map(int, input().split())
+        grid[y][x] = True
+    visited=[[False]*m for _ in range(n)]
+    bug = 0
+    for j in range(n):
+        for i in range(m):
+            if not visited[j][i]:
+                bfs(i,j)
+    print(bug)
