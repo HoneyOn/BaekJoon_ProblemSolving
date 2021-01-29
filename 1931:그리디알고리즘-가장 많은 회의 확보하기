@@ -1,0 +1,17 @@
+#이 문제에서 볼만한 것은
+#1) 그리디 알고리즘은 부분 최적화를 전역최적화로 확장시켜나가는 방법으로
+# 이 문제의 핵심은 끝나는 순으로 정렬했을 때,
+# 더 빨리 끝나는 시간이 그 뒤에 더 많은 회의를 확보할 수 있기 때문에
+# 빨리 끝나는 순서로의 정렬이 핵심이었다
+
+#2) sorted함수의 key=lambda x: ~ parameter를 이용하여 n차원 지정 정렬을 가능하게 해준다
+
+n = int(input())
+time = sorted([tuple(map(int, input().split())) for _ in range(n)], key=lambda x:(x[1], x[0]))
+ans=end = 0
+for s, e in time:
+    if s >= end:
+        ans += 1
+        end = e
+print(ans)
+
