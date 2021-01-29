@@ -1,0 +1,19 @@
+import sys
+from collections import deque
+input=sys.stdin.readline
+
+subin,sis=map(int,input().split())
+visited = [False for _ in range(200001)]
+queue=deque()
+queue.append((subin,0))
+while queue:
+    current,sec=queue.popleft()
+    if visited[current]:
+        continue
+    visited[current]=True
+    if current==sis:
+        print(sec)
+        break
+    for nextsubin in (current-1, current+1, 2*current):
+        if 0<=nextsubin<=200000 and visited[nextsubin] == False:
+            queue.append((nextsubin,sec+1))
