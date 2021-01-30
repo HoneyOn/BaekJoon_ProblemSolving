@@ -1,0 +1,42 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
+w, h = map(int, input().split())
+mat = []
+
+for i in range(h):
+    mat.append(list(map(int, input().split())))
+
+q = deque()
+for i in range(h):
+    for j in range(w):
+        if mat[i][j] == 1:
+            q.append([i, j])
+
+def bfs():
+    global q
+    while q:
+        now = q.popleft()
+        for i in range(4):
+            ny = now[0] + dy[i]
+            nx = now[1] + dx[i]
+            if 0 <= nx < w and 0 <= ny < h and mat[ny][nx] == 0:
+                mat[ny][nx] = mat[now[0]][now[1]] + 1
+                q.append([ny, nx])
+
+def go():
+    ans = 0
+    for i in range(h):
+        for j in range(w):
+            a = mat[i][j]
+            if a == 0:
+                print(-1)
+                return
+            ans = max(ans, a)
+    print(ans - 1)
+
+bfs()
+go()
