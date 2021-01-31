@@ -1,0 +1,52 @@
+
+#참고로 여기서 말하는 sync란 min heap과 max heap을 동기화시켜주는 존재로써
+1)def sync(arr):
+    while arr and id[arr[0][1]] == 0:
+        heapq.heappop(arr)
+이 함수와
+2)visited = [False]*int(1e6)
+존재를 알려주는 visited 리스트의 복합작용을 의미한다.
+
+import sys,heapq
+sys.setrecursionlimit(100000)
+input = sys.stdin.readline
+t = int(input())
+for _ in range(t):
+    k = int(input())
+    minry = list()
+    maxry = list()
+    visited = [False]*int(1e6)
+    for i in range(k):
+        order,num = input().split()
+        if order == "I":
+            num = int(num)
+            heapq.heappush(minry,(num,i))
+            heapq.heappush(maxry, (-num,i))
+            visited[i]=True
+        else:
+            if num == "1":
+                #sync 맞춰주는 부분. 들렸던 노드는 제끼기
+                while maxry and not visited[maxry[0][1]]:
+                    heapq.heappop(maxry)
+                #안들렸던 노드들이 남아있으면 최대값 제거
+                if maxry:
+                    visited[maxry[0][1]]=False
+                    heapq.heappop(maxry)
+            else:
+                while minry and not visited[minry[0][1]]:
+                    heapq.heappop(minry)
+                if minry:
+                    visited[minry[0][1]] = False
+                    heapq.heappop(minry)
+    #마지막 출력 전에 각 최소,최대노드가 들려서 빠진 노드들이면 제끼기
+    while maxry and not visited[maxry[0][1]]:
+        heapq.heappop(maxry)
+    while minry and not visited[minry[0][1]]:
+        heapq.heappop(minry)
+
+    if len(minry) == 0:
+        print("EMPTY")
+    else:
+        madmax = heapq.heappop(maxry)
+        cutemin = heapq.heappop(minry)
+        print(-madmax[0], cutemin[0])
