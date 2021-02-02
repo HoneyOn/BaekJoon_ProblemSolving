@@ -84,3 +84,32 @@ init()
 
 # 현재 정점 b에서 다시 가장 먼 정점 c를 찾고 그 때의 거리를 출력
 print(bfs(b)[0])
+
+------------------------------------------------------------------------------------------------------
+##3 DFS
+#인풋 아웃풋방식은 비슷하여 생략 
+
+def DFS(start, matrix, result):
+    for e, d in matrix[start]:
+        if result[e] == 0:
+            result[e] = result[start] + d
+            DFS(e, matrix, result)
+
+
+result1 = [0 for _ in range(V+1)]
+DFS(1, matrix, result1)  
+result1[1] = 0 
+
+tmpmax = 0
+index = 0
+
+for i in range(len(result1)):
+    if tmpmax < result1[i]:
+        tmpmax = result1[i]
+        index = i
+
+result2 = [0 for _ in range(V+1)]
+DFS(index, matrix, result2)
+result2[index] = 0
+
+print(max(result2))
