@@ -5,3 +5,82 @@
 
 #다익스트라 알고리즘은 특정 정점에서 다른 모든 정점으로의 최단거리를 뽑아준다.
 #특히 트리 구조는 모든 노드가 연결되어있기 때문에 다익스트라의 적용이 유용하다.
+
+##1 
+# 격수로 toNode와 weight받기
+v = int(input())
+mat = [[] for i in range(v + 1)]
+for i in range(1, v + 1):
+    a = list(map(int, input().split()))
+    for j in range(1, len(a), 2):
+        if a[j] != -1:
+            mat[a[0]].append([a[j], a[j + 1]])
+
+def Dijkstra(start):
+    heap = []
+    heapq.heappush(heap,[0,start])
+    d = [math.inf for i in range(v+1)]
+    d[start]=0
+    while heap:
+        dist, node = heapq.heappop(heap)
+        for toNode, NodeDist in mat[node]:
+            if NodeDist+dist < d[toNode]:
+                d[toNode] = NodeDist+dist
+                heapq.heappush(heap,[NodeDist+dist,toNode])
+    return d
+
+di_1 = Dijkstra(1)
+di_2 = Dijkstra(di_1.index(max(di_1[1:])))
+print(max(di_2[1:]))
+
+------------------------------------------------------------------------------------------------------
+##2 BFS
+import sys, collections
+
+# bfs : 임의의 한점에서 가장 먼 점과 그 거리를 리턴하는 함수
+# dfs로도 충분히 가능하다
+def bfs(num):
+    dist, node = 0,0
+    q = collections.deque()
+    q.append((num, 0))
+    check[num] = True
+    while q:
+        now, now_dist = q.popleft()
+        for i in adj[now]:
+            # 중복방문을 막기위해 check 배열 방문 여부 확인
+            if check[i[0]] == False:
+                check[i[0]] = True
+                # 단순히 두 정점간의 거리만 큐에 넣는 것이 아니라
+                # 현재까지의 거리와 현재 정점의 거리를 더해줘야 
+                # 두 정점의 총 거리이므로 now_dist와 i[1]을 더해주고 큐에 넣는다
+                q.append((i[0], i[1] + now_dist))
+                
+                # dist 최대값 갱신과 함께 그때 어떤 노드인지도 갱신
+                if now_dist + i[1] > dist:
+                    dist = now_dist + i[1]
+                    node = i[0]
+    return dist, node
+
+# init : 총 bfs를 두번해야 하기에 check 배열을 초기화하는 함수
+def init():
+    for i in range(n):
+        check[i] = False
+
+n = int(sys.stdin.readline())
+
+# 인접 리스트 생성
+adj = [[] for _ in range(n)]
+for i in range(n):
+    temp = list(map(int, sys.stdin.readline().split()))
+    for j in range(1, len(temp) - 1, 2):
+        adj[temp[0] - 1].append((temp[j] - 1, temp[j + 1]))
+
+check = [False] * n
+# 정점 0에서 시작하여 가장 먼 거리 a가 걸리는 정점 b를 찾는다
+a,b = bfs(0)
+
+# check 초기화
+init()
+
+# 현재 정점 b에서 다시 가장 먼 정점 c를 찾고 그 때의 거리를 출력
+print(bfs(b)[0])
