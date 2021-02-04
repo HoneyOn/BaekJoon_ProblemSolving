@@ -1,0 +1,35 @@
+import sys
+input = sys.stdin.readline
+text = input().strip()
+pattern = input().strip()
+L = len(text)
+LP = len(pattern)
+
+def Lps(text):
+    L=len(text)
+    _lps = [0 for i in range(L)]
+    j = 0
+    for i in range(1,L):
+        while j > 0 and text[i]!=text[j]:
+            j = _lps[j]
+        if text[i]==text[j]:
+            j+=1
+            _lps[i] = j
+    return _lps
+    
+    
+#KMP 구현
+ans = []
+j = 0
+lps = Lps(pattern)
+for i in range(L):
+    while j > 0 and text[i]!=pattern[j]:
+        j = lps[j-1]
+    if text[i]==pattern[j]:
+        if j == LP-1:
+            ans.append(i-LP+2)
+            j = lps[j]
+        else:
+            j += 1
+print(len(ans))
+print(*ans)
