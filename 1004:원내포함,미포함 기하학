@@ -1,0 +1,20 @@
+import sys
+input=sys.stdin.readline
+T = int(input())
+for _ in range(T):
+    x1,y1,x2,y2 = map(int,input().split())
+    n = int(input())
+    planet=[]
+    s_orbit=set()
+    e_orbit=set()
+    for _ in range(n):
+        planet.append(list(map(int,input().split())))
+    for i in range(len(planet)):
+        d = (planet[i][0]-x1)**2 + (planet[i][1]-y1)**2
+        if d <= planet[i][2]**2:
+            s_orbit.add(i)
+        D = (planet[i][0]-x2)**2 + (planet[i][1]-y2)**2
+        if D <= planet[i][2]**2:
+            e_orbit.add(i)
+    ans = s_orbit.symmetric_difference(e_orbit)
+    print(len(ans))
