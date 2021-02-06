@@ -1,0 +1,13 @@
+import sys
+input = sys.stdin.readline
+N, L, W, H =  map(int,input().split())
+st = 0
+ed = min(L,W,H)
+
+for _ in range(100000):
+    mid = (st+ed)/2
+    if (L//mid)*(W//mid)*(H//mid) >= N:
+        st = mid
+    else:
+        ed = mid
+print(f"{ed:0.9f}")
