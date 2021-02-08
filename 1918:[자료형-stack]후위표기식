@@ -1,0 +1,22 @@
+import sys,math
+from _collections import deque
+input = sys.stdin.readline
+sen = input().rstrip()
+priority = {"*":2,"/":2,"+":1,"-":1}
+stack = deque()
+for word in sen:
+    if str.isalpha(word):
+        print(word,end="")
+    else:
+        if word == '(':
+            stack.append(word)
+        elif word == ")":
+            while stack[-1] != '(':
+                print(stack.pop(), end="")
+            stack.pop()
+        else:
+            while stack and stack[-1] != "(" and priority[stack[-1]]>=priority[word]:
+                print(stack.pop(),end="")
+            stack.append(word)
+while stack:
+    print(stack.pop(),end="")
