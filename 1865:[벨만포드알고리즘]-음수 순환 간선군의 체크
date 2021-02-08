@@ -11,7 +11,7 @@ def bellmanFord():
             for wei, vec in adjList[j]:
                 if dist[vec] > wei + dist[j]:
                     dist[vec] = wei + dist[j]
-                    if i == N:
+                    if i == N: #2,3번의 반복은 단발적 구간 할인으로 N번째 반복의 update를 확인해야함
                         isPossible = False
 
 
