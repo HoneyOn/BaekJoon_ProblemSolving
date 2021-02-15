@@ -1,0 +1,8 @@
+from collections import Counter
+f,o = lambda:map(int,o().split()),open(0).readline
+for _ in range(*f()):
+  n,*l = f()
+  c = Counter(l)
+  v = c.values()
+  m = max(v)
+  print(next(i for i in c if c[i] == m) if m*2>n else "SYJKGW")
