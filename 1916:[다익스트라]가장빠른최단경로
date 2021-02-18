@@ -1,0 +1,22 @@
+#최단경로 기준으로 heap해줘야 하기에, 현재dist와 다음 node를 같이 저장해줘야한다.
+#인접행렬은 n^2 size로 만들면 메모리 초과가 쉽게 나기에 동적으로 할당받아야 좋다
+
+import heapq,sys
+input = sys.stdin.readline
+INF = int(1e9)
+n = int(input())
+adj = [[] for _ in range(n+1)]
+cost = [INF for _ in range(n+1)]
+for _ in range(int(input())):
+    s,e,w=map(int,input().split());adj[s].append((e,w))
+S,E = map(int,input().split())
+heap = list();
+heapq.heappush(heap,[0,S])
+cost[S] = 0
+while heap:
+    dist,fromP = heapq.heappop(heap)
+    for toP,wei in adj[fromP]:
+        if cost[fromP]+wei < cost[toP]:
+            cost[toP]=cost[fromP]+wei
+            heapq.heappush(heap, [cost[toP], toP])
+print(cost[E])
