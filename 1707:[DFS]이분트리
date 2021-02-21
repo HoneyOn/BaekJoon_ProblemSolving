@@ -1,0 +1,37 @@
+#트리는 계산 복잡도가 조금 늘더라도 모든 노드를 돌아야한다.
+#따라서 visited의 list 자료형이 필수적으로 넣어서 들린곳은 빠르게 넘어가야 한다.
+import sys
+from collections import deque
+input = sys.stdin.readline
+k = int(input())
+for _ in range(k):
+    V,E = map(int,input().split())
+    mat = [[] for _ in range(V+1)]
+    for _ in range(E):
+        i,j = map(int,input().split())
+        mat[i].append(j)
+        mat[j].append(i)
+    visited = list()
+    for i in range(1,V+1):
+        if i not in visited:
+            queue = deque();
+            red = set();black = set()
+            queue.append(i);red.add(i)
+            ans = True
+            while queue:
+                x = queue.popleft()
+                (opt,rev) = (red,black) if x in red else (black,red)
+                for elem in mat[x]:
+                    if elem in opt:
+                        ans = False
+                        break
+                    else:
+                        if elem not in rev:
+                            rev.add(elem)
+                            queue.append(elem)
+                            visited.append(elem)
+                if not ans:
+                    break
+            if not ans:
+                break
+    print("YES" if ans else "NO")
